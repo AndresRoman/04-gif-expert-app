@@ -1,23 +1,11 @@
+import { useEffect } from "react";
+import { getGifs } from "../helpers/getGifs";
 
 export const GifGrid = ({ category }) => {
 
-    const getGifs = async () => {
-
-        const url = `https://api.giphy.com/v1/gifs/search?api_key=3DLLhl8PPzyBdCB6DlnoYCivjMWgf2yc&q=${category}&limit=20`
-        const resp = await fetch(url);
-        const { data } = await resp.json();
-
-        const gifs = data.map(img => ({
-            id: img.id,
-            title: img.title,
-            url: img.images.downsized_medium.url,
-        }));
-
-        console.log(gifs);
-
-    }
-
-    getGifs();
+    useEffect(() => {
+        getGifs(category);
+    }, []);
 
     return (
         <>
@@ -26,4 +14,3 @@ export const GifGrid = ({ category }) => {
     )
 }
 
-//3DLLhl8PPzyBdCB6DlnoYCivjMWgf2yc
